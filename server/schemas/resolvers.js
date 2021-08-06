@@ -1,6 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
-const { signToken } = require('../../utils/auth');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -26,7 +26,7 @@ const resolvers = {
   },
   },
   Mutation: {
-    login: async (parent, {email, password }) => {
+    login: async (parent, {email}, {password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
@@ -34,7 +34,7 @@ const resolvers = {
       }
       const authPassword = await user.isCorrectPassword(password);
 
-      if (authPassword !== user.password) {
+      if (!authPassword) {
         throw new AuthenticationError('Incorrect credentials.');
       }
         const token = signToken(user)
@@ -44,9 +44,9 @@ const resolvers = {
       saveBook: async (parent, { input }, { user }) => {
         if (user) {
           const updatedUser = await User.findByIdAndUpdate(
-            {_id: user._id},
-            {$addToSet: {savedBooks: input} },
-            {new: true, runValidators: true}
+            { _id: user._id },
+            { $addToSet: { savedBooks: input } },
+            { new: true, runValidators: true}
           );
           return updatedUser;
         }
@@ -55,9 +55,9 @@ const resolvers = {
       removeBook: async (parent, {bookId}, {user}) => {
         if (user) {
           const modifiedUser = await User.findOneAndUpdate(
-            {_id: user._id},
-            {$pull: {savedBooks: {bookId: bookId} } },
-            {new: true, runValidators: true}
+            { _id: user._id },
+            { $pull: { savedBooks: { bookId: bookId } } },
+            { new: true, runValidators: true }
           );
           return modifiedUser;
         }
