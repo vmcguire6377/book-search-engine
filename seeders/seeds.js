@@ -14,7 +14,6 @@ db.once('open', async () => {
     const email = faker.internet.email();
     const password = faker.internet.password();
     const job = faker.name.jobTitle();
-    const country = faker.address.country();
 
     userData.push({ name, email, password, job, });
   }
