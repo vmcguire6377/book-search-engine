@@ -17,13 +17,15 @@
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
+    "apollo": "^2.5.2",
     "apollo-boost": "^0.4.9",
     "apollo-server": "^3.1.2",
     "apollo-server-express": "^2.25.2",
     "bcrypt": "^5.0.1",
     "graphql": "^15.5.1",
     "jsonwebtoken": "^8.5.1",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "react-hooks": "^1.0.1"
   },
   "repository": {
     "type": "git",
