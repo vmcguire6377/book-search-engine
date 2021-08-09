@@ -15,7 +15,7 @@ const resolvers = {
       throw new AuthenticationError('User is not logged in');
     }, 
     
-    // //get all users
+    // // //get all users
     // users: async () => {
     //   return User.find().select("-__v -password");
     // },
